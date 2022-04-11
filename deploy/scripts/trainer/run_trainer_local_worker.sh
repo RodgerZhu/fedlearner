@@ -23,8 +23,6 @@ source /app/deploy/scripts/hdfs_common.sh || true
 source /app/deploy/scripts/pre_start_hook.sh || true
 source /app/deploy/scripts/env_to_args.sh
 
-PEER_ADDR=${APPLICATION_ID}-RemoteWorker-${INDEX}.${EGRESS_DOMAIN}
-
 # When the WORKER_GROUPS is "2,4", this script would update the INDEX
 # to the worker's index within their own group, e.g.
 #
@@ -89,11 +87,10 @@ print(json.dumps({'clusterSpec': cluster_spec}))
 fi
 
 echo python main.py --worker \
+    --local-worker \
     --application-id="$APPLICATION_ID" \
     --master-addr="$MASTER_HOST:50051" \
     --cluster-spec="$CLUSTER_SPEC" \
-    --local-addr="$POD_IP:50051" \
-    --peer-addr="$PEER_ADDR" \
     --worker-rank="$INDEX" \
     $mode $batch_size \
     $sparse_estimator $learning_rate
