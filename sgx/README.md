@@ -200,7 +200,7 @@ dynamic_config.json:
 
 #### 6. Config leader and follower's IP
 
-In leader's  `test-ps-sgx.sh`, for `--peer-addr` , please replace `localhost` with `follower_contianer_ip`
+In leader's  `test-ps-sgx.sh`, for `--peer-addr` , please replace `localhost` with `follower_container_ip`
 
 ```
 elif [ "$ROLE" == "leader" ]; then
@@ -209,10 +209,10 @@ elif [ "$ROLE" == "leader" ]; then
     ......
     taskset -c 4-7 stdbuf -o0 gramine-sgx python -u leader.py \
     --local-addr=localhost:50051   \
-    --peer-addr=follower_contianer_ip:50052 
+    --peer-addr=follower_container_ip:50052 
 ```
 
-In follower's `test-ps-sgx.sh`, for `--peer-addr` , please replace `localhost` with `leader_contianer_ip`
+In follower's `test-ps-sgx.sh`, for `--peer-addr` , please replace `localhost` with `leader_container_ip`
 
 ```
 elif [ "$ROLE" == "follower" ]; then
@@ -227,7 +227,7 @@ elif [ "$ROLE" == "follower" ]; then
 *Note:* Get the container ip under your host: 
 
 ```
-docker inspect --format '{{ .NetworkSettings.IPAddress }}' contianer_id
+docker inspect --format '{{ .NetworkSettings.IPAddress }}' container_id
 ```
 
 #### 7.Run the distributing training
